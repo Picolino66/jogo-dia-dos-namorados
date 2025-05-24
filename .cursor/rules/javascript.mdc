@@ -1,0 +1,119 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## 🌐 **Frontend Development Guidelines**
+
+### 🟨 JavaScript Guidelines
+
+#### ✅ Code Quality
+
+* Always use **strict mode**:
+
+  ```js
+  'use strict';
+  ```
+* Prefer **ES6+ syntax** (e.g., `let`, `const`, arrow functions, template literals).
+* Avoid global variables and polluting the global scope.
+* Keep functions **pure** and small (Single Responsibility).
+* Avoid deeply nested code (use early returns and helper functions).
+
+#### 🔠 Naming Conventions
+
+* Use `camelCase` for variables and functions.
+* Use `PascalCase` for classes and constructors.
+* Constants should be in `UPPER_SNAKE_CASE`.
+
+#### 📦 Organization
+
+* Group related functions in modules/files.
+* Keep a **clear file structure** (`/services`, `/components`, `/utils`, etc.).
+* Export only one major component or utility per file.
+
+#### 🧼 Clean Code Practices
+
+* Avoid magic numbers — use named constants.
+* Don’t repeat code — follow DRY.
+* Prefer `.forEach`, `.map`, `.filter`, `.reduce` over `for`/`while` loops.
+* Use **destructuring** for objects and arrays.
+* Handle exceptions using `try...catch` for async/await patterns.
+
+#### 🧪 Testing (if applicable)
+
+* Write unit tests using Jest, Vitest or similar.
+* Mock dependencies and test edge cases.
+
+---
+
+### 🟦 HTML Guidelines
+
+#### 🔧 Structure & Semantics
+
+* Use semantic elements (`<header>`, `<main>`, `<article>`, `<footer>`, etc.).
+* Always declare `<!DOCTYPE html>` at the top.
+* Use `alt` attributes for all `<img>` tags for accessibility.
+* Prefer `<button>` for actions and `<a>` for navigation — never misuse tags.
+
+#### 📄 Formatting
+
+* Indent consistently (2 or 4 spaces).
+* Close all tags explicitly (`<br />`, `<img />`, etc.).
+* Use lowercase for element and attribute names.
+* Group related sections using `<section>` or `<div>` meaningfully.
+
+#### 🧭 Accessibility
+
+* Add `aria-` attributes when appropriate.
+* Use labels with inputs.
+* Use `<fieldset>` and `<legend>` for grouped inputs (e.g., forms).
+
+#### 🌍 Internationalization
+
+* Set language in `<html lang="en">`.
+* Use UTF-8 in `<meta charset="UTF-8">`.
+
+---
+
+### 🎨 CSS Guidelines
+
+#### 📏 Consistency & Clarity
+
+* Use a consistent naming convention — **BEM** is highly recommended.
+
+  * Example: `.btn--primary`, `.card__title`
+* Use `rem`/`em` for spacing and sizing — avoid `px` unless necessary.
+* Group related styles together.
+
+#### 🧩 Organization
+
+* Structure your stylesheets modularly:
+
+  * `/base/` for resets and base styles
+  * `/components/` for reusable UI elements
+  * `/layouts/` for grid and layout logic
+  * `/pages/` for page-specific styles
+* Avoid inline styles and `!important`.
+
+#### 🌈 Styling Practices
+
+* Define a design system: colors, font sizes, spacing, etc.
+* Use CSS variables (`--primary-color`) for theming.
+* Avoid hardcoded values — reuse variables and utility classes.
+
+#### 🛠 Tools & Extensions
+
+* Use a preprocessor like **Sass** if the project is large.
+* Use linters like **Stylelint** and formatters like **Prettier**.
+* Consider utility-first frameworks (e.g., Tailwind CSS) if relevant.
+
+---
+
+### 🧪 Cross-Technology Best Practices
+
+* Use version control (Git) and make meaningful commits.
+* Document your code with comments where the logic is non-obvious.
+* Keep performance in mind: minimize DOM manipulation, load scripts defer/async, optimize assets.
+* Follow mobile-first and responsive design principles.
+* Use tools like Lighthouse, Web Vitals, or DevTools for audit and testing.
+
