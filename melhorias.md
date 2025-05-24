@@ -2,129 +2,98 @@
 
 ## Organização e Estrutura do Código 📁
 
-- [ ] Criar arquivo de constantes (`src/constants/game.js`)
-  - [ ] Constantes de dimensões (PLAYER, ENEMY, FIRE)
-  - [ ] Constantes de física (GRAVITY, BOUNCE)
-  - [ ] Constantes de gameplay (GAME_TIME, SCORE_POINTS)
+- [x] Criar arquivo de constantes (`src/constants/game.js`)
+  - [x] Constantes de dimensões (PLAYER, ENEMY, FIRE)
+  - [x] Constantes de física (GRAVITY, BOUNCE)
+  - [x] Constantes de gameplay (GAME_TIME, SCORE_POINTS)
 
-- [ ] Separar lógica em classes específicas
-  - [ ] PlayerFactory
-  - [ ] EnemyFactory
-  - [ ] PlatformFactory
-  - [ ] GameSprite (classe base)
+- [x] Separar lógica em classes específicas
+  - [x] PlayerFactory
+  - [x] EnemyFactory
+  - [x] PlatformFactory
+  - [x] GameSprite (classe base)
 
-- [ ] Reorganizar estrutura de arquivos
-  - [ ] Criar pasta `entities/` para classes de entidades
-  - [ ] Criar pasta `factories/` para factories
-  - [ ] Criar pasta `utils/` para funções utilitárias
-  - [ ] Criar pasta `config/` para configurações
+- [x] Reorganizar estrutura de arquivos
+  - [x] Criar pasta `utils/` para funções utilitárias
+  - [x] Criar pasta `config/` para configurações
+  - [x] Criar pasta `entities/` para classes de entidades
+  - [x] Criar pasta `factories/` para factories
 
 ## Clean Code 🧹
 
-- [ ] Refatorar funções grandes
-  - [ ] Dividir `createDogsAndProtectors()`
-  - [ ] Dividir `create()`
-  - [ ] Dividir `update()`
+- [x] Refatorar funções grandes
+  - [x] Dividir `createDogsAndProtectors()`
+  - [x] Dividir `create()`
+  - [x] Dividir `update()`
 
-- [ ] Eliminar código duplicado
-  - [ ] Remover colliders duplicados
-  - [ ] Unificar lógica de criação de sprites
-  - [ ] Centralizar lógica de física
+- [x] Eliminar código duplicado
+  - [x] Remover colliders duplicados
+  - [x] Unificar lógica de criação de sprites
+  - [x] Centralizar lógica de física
 
-- [ ] Melhorar nomenclatura
-  - [ ] Padronizar nomes de variáveis
-  - [ ] Usar nomes mais descritivos
-  - [ ] Seguir convenções do JavaScript
+- [x] Melhorar nomenclatura
+  - [x] Padronizar nomes de variáveis
+  - [x] Usar nomes mais descritivos
+  - [x] Seguir convenções do JavaScript
+
+## Sistemas 🔧
+
+- [x] Implementar sistemas modulares
+  - [x] Sistema de HUD
+  - [x] Sistema de Colisões
+  - [x] Sistema de Animações
+  - [x] Sistema de Jogo (Game System)
+
+- [x] Refatorar cenas
+  - [x] Refatorar Dog1Scene
+  - [ ] Refatorar outras cenas (se houver)
 
 ## Documentação 📚
 
-- [ ] Adicionar JSDoc para classes principais
-  - [ ] Documentar `Dog1Scene`
-  - [ ] Documentar `Davi2Scene`
-  - [ ] Documentar `Bull3Scene`
+- [ ] Documentar APIs
+  - [ ] Documentar sistemas
+  - [ ] Documentar factories
+  - [ ] Documentar entidades
 
-- [ ] Documentar efeitos colaterais
-  - [ ] Colisões
-  - [ ] Eventos de física
-  - [ ] Mudanças de estado
-
-- [ ] Criar README detalhado
-  - [ ] Instruções de instalação
-  - [ ] Como rodar o projeto
-  - [ ] Estrutura do código
-  - [ ] Regras do jogo
+- [ ] Criar guias
+  - [ ] Guia de desenvolvimento
+  - [ ] Guia de arquitetura
+  - [ ] Guia de contribuição
 
 ## Testes e Qualidade 🧪
 
-- [ ] Implementar testes unitários
-  - [ ] Testes para factories
-  - [ ] Testes para lógica de jogo
-  - [ ] Testes para colisões
+- [ ] Implementar testes
+  - [ ] Testes unitários
+  - [ ] Testes de integração
+  - [ ] Testes de cena
 
-- [ ] Adicionar linting
-  - [ ] Configurar ESLint
-  - [ ] Configurar Prettier
-  - [ ] Adicionar regras personalizadas
-
-- [ ] Implementar CI/CD
-  - [ ] Adicionar GitHub Actions
-  - [ ] Configurar build automático
-  - [ ] Configurar deploy automático
+- [ ] Configurar ferramentas
+  - [ ] ESLint
+  - [ ] Prettier
+  - [ ] Jest ou similar
 
 ## Otimizações de Performance 🚀
 
-- [ ] Melhorar gestão de memória
-  - [ ] Limpar eventos não utilizados
-  - [ ] Otimizar criação/destruição de sprites
-  - [ ] Implementar object pooling
+- [ ] Otimizar renderização
+  - [ ] Pooling de objetos
+  - [ ] Lazy loading de assets
+  - [ ] Otimizar sprites
 
-- [ ] Otimizar física
-  - [ ] Ajustar áreas de colisão
-  - [ ] Melhorar detecção de colisões
-  - [ ] Otimizar cálculos de movimento
-
-## Padrões de Projeto 📐
-
-- [ ] Implementar padrões relevantes
-  - [ ] Observer para eventos
-  - [ ] State para estados do jogo
-  - [ ] Factory para criação de objetos
-
-- [ ] Melhorar arquitetura
-  - [ ] Separar lógica de renderização
-  - [ ] Implementar gerenciamento de estado
-  - [ ] Criar sistema de eventos
-
-## Gameplay e UX 🎯
-
-- [ ] Melhorar feedback visual
-  - [ ] Adicionar animações de transição
-  - [ ] Melhorar feedback de colisão
-  - [ ] Adicionar efeitos visuais
-
-- [ ] Aprimorar controles
-  - [ ] Ajustar física do pulo
-  - [ ] Melhorar movimentação
-  - [ ] Adicionar controles customizáveis
+- [ ] Melhorar performance
+  - [ ] Reduzir chamadas de física
+  - [ ] Otimizar colisões
+  - [ ] Cache de objetos
 
 ## Acessibilidade ♿
 
-- [ ] Implementar features de acessibilidade
-  - [ ] Suporte a alto contraste
-  - [ ] Opções de tamanho de fonte
-  - [ ] Suporte a screen readers
+- [ ] Implementar recursos de acessibilidade
+  - [ ] Controles configuráveis
+  - [ ] Suporte a teclado
+  - [ ] Alto contraste
+
+- [ ] Melhorar feedback visual
+  - [ ] Indicadores de dano
+  - [ ] Feedback de progresso
+  - [ ] Tutoriais visuais
 
 ---
-
-### Como usar este checklist:
-
-1. Marque as caixas `[x]` conforme completar cada item
-2. Adicione notas ou comentários quando necessário
-3. Revise periodicamente o progresso
-4. Atualize conforme novas necessidades surgirem
-
-### Prioridades:
-
-1. 🔴 Alta - Essencial para qualidade do código
-2. 🟡 Média - Importante para manutenção
-3. 🟢 Baixa - Melhorias incrementais 

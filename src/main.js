@@ -3,17 +3,20 @@ import Dog1Scene from './scenes/Dog1Scene.js';
 import Davi2Scene from './scenes/Davi2Scene.js';
 import Bull3Scene from './scenes/Bull3Scene.js';
 import EndScene from './scenes/EndScene.js';
+import { PHYSICS, GAMEPLAY } from './constants/game.js';
 
-// Configuração do jogo
+/**
+ * Configuração principal do jogo
+ */
 const config = {
-    type: Phaser.AUTO,
+    type: Phaser.WEBGL,
     width: 800,
     height: 600,
     parent: 'game-container',
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: PHYSICS.GRAVITY },
             debug: true
         }
     },
