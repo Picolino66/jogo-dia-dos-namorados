@@ -14,9 +14,6 @@ export default class CollisionSystem {
         physics.add.collider(this.scene.dogs, this.scene.platforms);
         physics.add.collider(this.scene.enemies, this.scene.platforms);
         physics.add.collider(this.scene.fires, this.scene.platforms);
-
-        // Adicionar colisão entre inimigos e cachorros
-        physics.add.collider(this.scene.enemies, this.scene.dogs);
         
         // Sobreposições para interações
         physics.add.overlap(
@@ -44,18 +41,29 @@ export default class CollisionSystem {
         );
     }
 
-    handleDogCollision(player, dog) {
-        dog.destroy();
-        this.scene.savedDogs++;
-        this.scene.hud.updateScore(this.scene.savedDogs, GAMEPLAY.REQUIRED_DOGS);
-        this.createSaveEffect(dog.x, dog.y);
+    handleEnemyCollision(player, enemy) {
+        // Verificar se o jogador está caindo (velocidade Y positiva)
+        if (player.body.velocity.y > 0) {
+            // Verificar se o jogador está acima do inimigo
+            // Usamos uma verificação mais simples baseada apenas na posição Y
+            if (player.y < enemy.y - 30) { // Margem de 30 pixels para facilitar o acerto
+                // Jogador matou o inimigo
+                player.setVelocityY(-300);
+                enemy.destroy();
+                this.createDefeatEffect(enemy.x, enemy.y);
+                return;
+            }
+        }
+        
+        // Se não matou o inimigo e não está invulnerável, toma dano
+        if (!player.isHurt) {
+            this.damagePlayer(player);
+        }
     }
 
-    handleEnemyCollision(player, enemy) {
-        if (player.body.velocity.y > 0 && player.y < enemy.y - enemy.height/2) {
-            this.defeatEnemy(player, enemy);
-        } else {
-            this.damagePlayer(player);
+    handleDogCollision(player, dog) {
+        if (!player.isHurt) {
+            dog.checkPlayerProximity(player);
         }
     }
 
@@ -66,25 +74,16 @@ export default class CollisionSystem {
         this.damagePlayer(player);
     }
 
-    defeatEnemy(player, enemy) {
-        player.setVelocityY(-200);
-        this.createDefeatEffect(enemy.x, enemy.y);
-        enemy.destroy();
-    }
-
     damagePlayer(player) {
-        if (!player.isHurt) {
-            this.scene.timeLeft -= GAMEPLAY.PENALTIES.HIT_TIME_LOSS;
-            this.scene.hud.updateTime(this.scene.timeLeft);
-            
-            player.isHurt = true;
-            player.setTint(0xff0000);
-            
-            this.scene.time.delayedCall(GAMEPLAY.PENALTIES.INVULNERABLE_TIME, () => {
-                player.clearTint();
-                player.isHurt = false;
-            });
-        }
+        if (player.isHurt) return;
+        
+        player.isHurt = true;
+        player.setTint(0xff0000);
+        
+        this.scene.time.delayedCall(1000, () => {
+            player.isHurt = false;
+            player.clearTint();
+        });
     }
 
     createDefeatEffect(x, y) {
@@ -105,6 +104,6 @@ export default class CollisionSystem {
     }
 
     createSaveEffect(x, y) {
-        this.createDefeatEffect(x, y); // Mesmo efeito visual por enquanto
+        this.createDefeatEffect(x, y);
     }
 } 

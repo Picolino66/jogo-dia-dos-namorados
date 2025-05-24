@@ -32,6 +32,11 @@ export default class Dog1Scene extends Phaser.Scene {
         for (let i = 1; i <= 6; i++) {
             this.load.image(`fire-${i}`, `src/assets/sprites/fire/${i}.png`);
         }
+
+        // Carregar os sprites do mendigo
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`enemy-${i}`, `src/assets/sprites/enemy/${i}.png`);
+        }
     }
 
     createBaseTextures() {
@@ -105,6 +110,18 @@ export default class Dog1Scene extends Phaser.Scene {
                 { key: 'fire-6' }
             ],
             frameRate: 8,
+            repeat: -1
+        });
+
+        // Animação do mendigo
+        this.anims.create({
+            key: 'enemy-walk',
+            frames: [
+                { key: 'enemy-1' },
+                { key: 'enemy-2' },
+                { key: 'enemy-3' }
+            ],
+            frameRate: 6,
             repeat: -1
         });
     }
@@ -192,7 +209,7 @@ export default class Dog1Scene extends Phaser.Scene {
         ];
 
         positions.forEach(pos => {
-            // Criar cachorro (todos iguais agora)
+            // Criar cachorro
             const dog = this.dogFactory.create(pos.x, pos.y);
             this.dogs.add(dog);
 
@@ -224,6 +241,9 @@ export default class Dog1Scene extends Phaser.Scene {
                 });
             }
         });
+
+        // Remover a colisão entre inimigos e cachorros
+        this.physics.add.collider(this.enemies, this.platforms);
     }
 
     update() {

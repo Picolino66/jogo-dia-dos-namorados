@@ -1,18 +1,28 @@
 import GameSprite from './GameSprite.js';
-import { PHYSICS, COLORS } from '../constants/game.js';
+import { PHYSICS, COLORS, DIMENSIONS } from '../constants/game.js';
 
 export default class EnemySprite extends GameSprite {
     constructor(scene, x, y) {
-        super(scene, x, y, 'ENEMY');
+        // Usar o primeiro sprite do mendigo como textura inicial
+        super(scene, x, y, 'ENEMY', { texture: 'enemy-1' });
         this.setupEnemy();
     }
 
     setupEnemy() {
-        this.setTint(COLORS.ENEMY);
+        // Configurar física e comportamento
         this.setBounce(PHYSICS.BOUNCE);
         this.setCollideWorldBounds(true);
-        this.setImmovable(false); // Mudamos para false para permitir colisões
+        this.setImmovable(false);
         
+        // Configurar dimensões do corpo de colisão
+        const { BODY, VISUAL } = DIMENSIONS.ENEMY;
+        this.body.setSize(BODY.WIDTH+200, BODY.HEIGHT+300);
+        this.setDisplaySize(70, 80); // Tamanho visual maior para o sprite
+        
+        // Ajustar origem para alinhar com o chão
+        this.setOrigin(0.5, 1);
+        
+        // Configurar movimento
         this.moveSpeed = PHYSICS.ENEMY.MOVE_SPEED;
         this.patrolSpeed = PHYSICS.ENEMY.PATROL_SPEED;
         this.visionRange = PHYSICS.ENEMY.VISION_RANGE;
@@ -22,6 +32,9 @@ export default class EnemySprite extends GameSprite {
         this.startPatrolX = this.x;
         this.direction = 1;
         this.isPatrolling = true;
+
+        // Iniciar animação
+        this.play('enemy-walk');
     }
 
     update(player) {
@@ -37,6 +50,13 @@ export default class EnemySprite extends GameSprite {
             this.patrol();
             this.isPatrolling = true;
         }
+
+        // Atualizar direção do sprite
+        if (this.body.velocity.x < 0) {
+            this.setFlipX(true);
+        } else if (this.body.velocity.x > 0) {
+            this.setFlipX(false);
+        }
     }
 
     chasePlayer(player) {
@@ -46,18 +66,14 @@ export default class EnemySprite extends GameSprite {
     }
 
     patrol() {
-        // Verifica se está dentro da área de patrulha
         const distanceFromStart = this.x - this.startPatrolX;
         
-        // Inverte a direção se atingir o limite da patrulha ou se colidir
         if (Math.abs(distanceFromStart) >= this.patrolRange || 
             (this.body.touching.left || this.body.touching.right)) {
             this.direction *= -1;
-            // Ajusta a posição levemente para evitar travamento
             this.x += this.direction * 5;
         }
         
-        // Move na direção atual com velocidade de patrulha
         this.setVelocityX(this.direction * this.patrolSpeed);
     }
 }
