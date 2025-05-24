@@ -3,7 +3,7 @@ import { COLORS } from '../constants/game.js';
 
 export default class FireSprite extends GameSprite {
     constructor(scene, x, y) {
-        super(scene, x, y, 'FIRE');
+        super(scene, x, y, 'FIRE', { texture: 'fire-1' });
         
         this.setupFire();
     }
@@ -12,5 +12,7 @@ export default class FireSprite extends GameSprite {
         this.setTint(COLORS.FIRE);
         this.setImmovable(true);
         this.body.setAllowGravity(false);
+        
+        this.setOrigin(0.5, 1);
     }
 } 

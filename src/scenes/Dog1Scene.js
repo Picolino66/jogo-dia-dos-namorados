@@ -18,7 +18,7 @@ export default class Dog1Scene extends Phaser.Scene {
     preload() {
         this.createBaseTextures();
         
-        // Carregar os sprites do cachorro triste com o caminho correto
+        // Carregar os sprites do cachorro triste
         for (let i = 1; i <= 6; i++) {
             this.load.image(`dog-sad-${i}`, `src/assets/sprites/dog/triste/${i}.png`);
         }
@@ -26,6 +26,11 @@ export default class Dog1Scene extends Phaser.Scene {
         // Carregar os sprites do cachorro feliz
         for (let i = 1; i <= 6; i++) {
             this.load.image(`dog-happy-${i}`, `src/assets/sprites/dog/feliz/${i}.png`);
+        }
+        
+        // Carregar os sprites do fogo
+        for (let i = 1; i <= 6; i++) {
+            this.load.image(`fire-${i}`, `src/assets/sprites/fire/${i}.png`);
         }
     }
 
@@ -83,6 +88,21 @@ export default class Dog1Scene extends Phaser.Scene {
                 { key: 'dog-happy-4' },
                 { key: 'dog-happy-5' },
                 { key: 'dog-happy-6' }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
+        // Animação do fogo
+        this.anims.create({
+            key: 'fire-frames',
+            frames: [
+                { key: 'fire-1' },
+                { key: 'fire-2' },
+                { key: 'fire-3' },
+                { key: 'fire-4' },
+                { key: 'fire-5' },
+                { key: 'fire-6' }
             ],
             frameRate: 8,
             repeat: -1
@@ -180,10 +200,28 @@ export default class Dog1Scene extends Phaser.Scene {
             if (pos.protector === 'enemy') {
                 const enemy = this.enemyFactory.create(pos.x - 70, pos.y);
                 this.enemies.add(enemy);
-            } else {
-                const fire = this.fireFactory.create(pos.x - 50, pos.y);
+            } else if (pos.protector === 'fire') {
+                // Criar fogo usando o FireFactory
+                const fire = this.fireFactory.create(pos.x - 20, pos.y);
                 this.fires.add(fire);
-                this.animationSystem.createFireAnimation(fire);
+                
+                // Configurar dimensões e física
+                fire.setSize(200, 300);
+                fire.setDisplaySize(50, 70);
+                fire.setOrigin(0.5, 1);
+                
+                // Aplicar a animação dos sprites
+                fire.play('fire-frames');
+                
+                // Criar a animação de escala para colisão
+                this.tweens.add({
+                    targets: fire,
+                    scaleY: 0.25,
+                    duration: 2000,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: 'Sine.easeInOut'
+                });
             }
         });
     }
@@ -194,6 +232,14 @@ export default class Dog1Scene extends Phaser.Scene {
         this.updateEnemies();
         this.updateDogs();
         this.gameSystem.checkWinCondition();
+
+        // Sincronizar posição do sprite visual do fogo
+        this.fires.getChildren().forEach(fire => {
+            if (fire.visual) {
+                fire.visual.x = fire.x;
+                fire.visual.y = fire.y;
+            }
+        });
     }
 
     handlePlayerMovement() {

@@ -4,13 +4,30 @@ export default class AnimationSystem {
     }
 
     createFireAnimation(fire) {
+        // Configurar o fogo para iniciar na escala normal
+        fire.setScale(1, 1);
+
         this.scene.tweens.add({
             targets: fire,
-            scaleY: 0.25,
-            duration: 2000,
-            yoyo: true,
-            repeat: -1,
-            ease: 'Sine.easeInOut'
+            scaleY: 0.25, // Reduz para 1/4 da altura
+            duration: 500, // 0.5 segundos para descer
+            ease: 'Sine.easeOut',
+            onComplete: () => {
+                // Pausa de 1 segundo na posição baixa
+                this.scene.time.delayedCall(1000, () => {
+                    // Depois sobe de volta
+                    this.scene.tweens.add({
+                        targets: fire,
+                        scaleY: 1, // Volta ao tamanho original
+                        duration: 500, // 0.5 segundos para subir
+                        ease: 'Sine.easeIn',
+                        onComplete: () => {
+                            // Reinicia o ciclo
+                            this.createFireAnimation(fire);
+                        }
+                    });
+                });
+            }
         });
     }
 
