@@ -64,7 +64,7 @@ export const PHYSICS = {
         JUMP_FORCE: -330
     },
     ENEMY: {
-        MOVE_SPEED: 50,
+        MOVE_SPEED: 150,
         PATROL_SPEED: 30,
         VISION_RANGE: 200,
         VISION_HEIGHT: 100,

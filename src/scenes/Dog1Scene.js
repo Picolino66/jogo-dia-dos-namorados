@@ -17,6 +17,11 @@ export default class Dog1Scene extends Phaser.Scene {
 
     preload() {
         this.createBaseTextures();
+        
+        // Carregar os sprites do cachorro triste com o caminho correto
+        for (let i = 1; i <= 6; i++) {
+            this.load.image(`dog-sad-${i}`, `src/assets/sprites/dog/triste/${i}.png`);
+        }
     }
 
     createBaseTextures() {
@@ -29,6 +34,7 @@ export default class Dog1Scene extends Phaser.Scene {
     create() {
         this.initializeScene();
         this.createSystems();
+        this.createAnimations();
         this.createFactories();
         this.createGameObjects();
         this.setupCamera();
@@ -44,6 +50,23 @@ export default class Dog1Scene extends Phaser.Scene {
         this.hud = new HUDSystem(this);
         this.gameSystem = new GameSystem(this);
         this.animationSystem = new AnimationSystem(this);
+    }
+
+    createAnimations() {
+        // Animação do cachorro triste
+        this.anims.create({
+            key: 'dog-sad',
+            frames: [
+                { key: 'dog-sad-1' },
+                { key: 'dog-sad-2' },
+                { key: 'dog-sad-3' },
+                { key: 'dog-sad-4' },
+                { key: 'dog-sad-5' },
+                { key: 'dog-sad-6' }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
     }
 
     createFactories() {
