@@ -22,6 +22,11 @@ export default class Dog1Scene extends Phaser.Scene {
         for (let i = 1; i <= 6; i++) {
             this.load.image(`dog-sad-${i}`, `src/assets/sprites/dog/triste/${i}.png`);
         }
+        
+        // Carregar os sprites do cachorro feliz
+        for (let i = 1; i <= 6; i++) {
+            this.load.image(`dog-happy-${i}`, `src/assets/sprites/dog/feliz/${i}.png`);
+        }
     }
 
     createBaseTextures() {
@@ -63,6 +68,21 @@ export default class Dog1Scene extends Phaser.Scene {
                 { key: 'dog-sad-4' },
                 { key: 'dog-sad-5' },
                 { key: 'dog-sad-6' }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
+        // Animação do cachorro feliz
+        this.anims.create({
+            key: 'dog-happy',
+            frames: [
+                { key: 'dog-happy-1' },
+                { key: 'dog-happy-2' },
+                { key: 'dog-happy-3' },
+                { key: 'dog-happy-4' },
+                { key: 'dog-happy-5' },
+                { key: 'dog-happy-6' }
             ],
             frameRate: 8,
             repeat: -1
@@ -152,7 +172,7 @@ export default class Dog1Scene extends Phaser.Scene {
         ];
 
         positions.forEach(pos => {
-            // Criar cachorro
+            // Criar cachorro (todos iguais agora)
             const dog = this.dogFactory.create(pos.x, pos.y);
             this.dogs.add(dog);
 
@@ -170,8 +190,9 @@ export default class Dog1Scene extends Phaser.Scene {
 
     update() {
         this.handlePlayerMovement();
-        this.player.update(); // Adicione esta linha
+        this.player.update();
         this.updateEnemies();
+        this.updateDogs();
         this.gameSystem.checkWinCondition();
     }
 
@@ -192,6 +213,13 @@ export default class Dog1Scene extends Phaser.Scene {
     updateEnemies() {
         this.enemies.getChildren().forEach(enemy => {
             enemy.update(this.player);
+        });
+    }
+
+    updateDogs() {
+        // Verificar proximidade do jogador com todos os cachorros
+        this.dogs.getChildren().forEach(dog => {
+            dog.checkPlayerProximity(this.player);
         });
     }
 } 
