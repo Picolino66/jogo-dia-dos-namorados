@@ -15,6 +15,9 @@ export default class CollisionSystem {
         physics.add.collider(this.scene.enemies, this.scene.platforms);
         physics.add.collider(this.scene.fires, this.scene.platforms);
 
+        // Adicionar colisão entre inimigos e cachorros
+        physics.add.collider(this.scene.enemies, this.scene.dogs);
+        
         // Sobreposições para interações
         physics.add.overlap(
             this.scene.player,

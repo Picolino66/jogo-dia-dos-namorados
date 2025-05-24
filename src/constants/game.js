@@ -32,7 +32,7 @@ export const DIMENSIONS = {
         },
         BODY: {
             WIDTH: 20,
-            HEIGHT: 35
+            HEIGHT: 30
         },
         OFFSET: {
             HEIGHT: 0
@@ -45,7 +45,7 @@ export const DIMENSIONS = {
         },
         BODY: {
             WIDTH: 20,
-            HEIGHT: 25
+            HEIGHT: 30
         },
         OFFSET: {
             HEIGHT: 10
@@ -68,7 +68,7 @@ export const PHYSICS = {
         PATROL_SPEED: 30,
         VISION_RANGE: 200,
         VISION_HEIGHT: 100,
-        PATROL_RANGE: 30
+        PATROL_RANGE: 20
     }
 };
 

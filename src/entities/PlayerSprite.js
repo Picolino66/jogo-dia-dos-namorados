@@ -23,14 +23,14 @@ export default class PlayerSprite extends GameSprite {
     }
 
     jump() {
-        if (this.body.touching.down && !this.isJumping) {
+        if ((this.body.touching.down || this.body.blocked.down) && !this.isJumping) {
             this.setVelocityY(this.jumpForce);
             this.isJumping = true;
         }
     }
 
     update() {
-        if (this.body.touching.down) {
+        if (this.body.touching.down || this.body.blocked.down) {
             this.isJumping = false;
         }
     }

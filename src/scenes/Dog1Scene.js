@@ -116,16 +116,16 @@ export default class Dog1Scene extends Phaser.Scene {
 
     createDogsAndProtectors() {
         const positions = [
-            { x: 300, y: 450, protector: 'fire' },
-            { x: 800, y: 380, protector: 'enemy' },
-            { x: 1300, y: 300, protector: 'fire' },
-            { x: 1800, y: 420, protector: 'enemy' },
-            { x: 2300, y: 340, protector: 'fire' },
-            { x: 2800, y: 250, protector: 'enemy' },
-            { x: 3300, y: 420, protector: 'fire' },
-            { x: 3800, y: 340, protector: 'enemy' },
-            { x: 4300, y: 270, protector: 'fire' },
-            { x: 4800, y: 370, protector: 'enemy' }
+            { x: 370, y: 400, protector: 'fire' },
+            { x: 900, y: 380, protector: 'enemy' },
+            { x: 1370, y: 300, protector: 'fire' },
+            { x: 1900, y: 420, protector: 'enemy' },
+            { x: 2370, y: 340, protector: 'fire' },
+            { x: 2900, y: 250, protector: 'enemy' },
+            { x: 3370, y: 420, protector: 'fire' },
+            { x: 3900, y: 340, protector: 'enemy' },
+            { x: 4370, y: 270, protector: 'fire' },
+            { x: 4900, y: 370, protector: 'enemy' }
         ];
 
         positions.forEach(pos => {
@@ -147,6 +147,7 @@ export default class Dog1Scene extends Phaser.Scene {
 
     update() {
         this.handlePlayerMovement();
+        this.player.update(); // Adicione esta linha
         this.updateEnemies();
         this.gameSystem.checkWinCondition();
     }
